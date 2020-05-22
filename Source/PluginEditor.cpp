@@ -24,6 +24,7 @@ KadenzePlugin1AudioProcessorEditor::KadenzePlugin1AudioProcessorEditor (KadenzeP
     mGainControlSlider.setBounds(0, 0, 100, 100);
     mGainControlSlider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
     mGainControlSlider.setTextBoxStyle(Slider::NoTextBox, true, 0, 0);
+    mGainControlSlider.addListener(this);
     addAndMakeVisible(mGainControlSlider);
     
 }
@@ -47,4 +48,11 @@ void KadenzePlugin1AudioProcessorEditor::resized()
 {
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
+}
+
+void KadenzePlugin1AudioProcessorEditor::sliderValueChanged (Slider* slider)
+{
+    
+    DBG("SLIDER VALUE CHANGED");
+    
 }
