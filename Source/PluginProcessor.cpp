@@ -24,6 +24,9 @@ KadenzePlugin1AudioProcessor::KadenzePlugin1AudioProcessor()
                        )
 #endif
 {
+    
+    addParameter(mGainParameter = new AudioParameterFloat("gain", "Gain", 0.0f, 1.0f, 0.5f));
+    
 }
 
 KadenzePlugin1AudioProcessor::~KadenzePlugin1AudioProcessor()
@@ -158,7 +161,7 @@ void KadenzePlugin1AudioProcessor::processBlock (AudioBuffer<float>& buffer, Mid
         
          for (int sample = 0; sample < buffer.getNumSamples(); sample++ )
     {
-            channelData[sample] *= 0.5;
+            channelData[sample] *= mGainParameter->get();
 
     }
             
