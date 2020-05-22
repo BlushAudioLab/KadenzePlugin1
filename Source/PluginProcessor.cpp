@@ -13,19 +13,19 @@
 
 //==============================================================================
 KadenzePlugin1AudioProcessor::KadenzePlugin1AudioProcessor()
-#ifndef JucePlugin_PreferredChannelConfigurations
+
      : AudioProcessor (BusesProperties()
-                     #if ! JucePlugin_IsMidiEffect
-                      #if ! JucePlugin_IsSynth
+                     
                        .withInput  ("Input",  AudioChannelSet::stereo(), true)
-                      #endif
-                       .withOutput ("Output", AudioChannelSet::stereo(), true)
-                     #endif
-                       )
-#endif
+                     
+                       .withOutput ("Output", AudioChannelSet::stereo(), true))
+
 {
     
     addParameter(mGainParameter = new AudioParameterFloat("gain", "Gain", 0.0f, 1.0f, 0.5f));
+    
+    mGainSmoothed = mGainParameter->get( );
+
     
 }
 
@@ -111,24 +111,14 @@ void KadenzePlugin1AudioProcessor::releaseResources()
 #ifndef JucePlugin_PreferredChannelConfigurations
 bool KadenzePlugin1AudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
 {
-  #if JucePlugin_IsMidiEffect
-    ignoreUnused (layouts);
-    return true;
-  #else
-    // This is the place where you check if the layout is supported.
-    // In this template code we only support mono or stereo.
-    if (layouts.getMainOutputChannelSet() != AudioChannelSet::mono()
-     && layouts.getMainOutputChannelSet() != AudioChannelSet::stereo())
-        return false;
-
-    // This checks if the input layout matches the output layout
-   #if ! JucePlugin_IsSynth
-    if (layouts.getMainOutputChannelSet() != layouts.getMainInputChannelSet())
-        return false;
-   #endif
-
-    return true;
-  #endif
+   if (layouts.getMainInputChannelSet() == AudioChannelSet::stereo() &&
+        layouts.getMainOutputChannelSet() == AudioChannelSet::stereo())
+{
+        return true;
+    }
+        else {
+                  return false;
+                   }
 }
 #endif
 
@@ -153,20 +143,25 @@ void KadenzePlugin1AudioProcessor::processBlock (AudioBuffer<float>& buffer, Mid
     // the samples and the outer loop is handling the channels.
     // Alternatively, you can process the samples with the channels
     // interleaved by keeping the same state.
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    {
-        auto* channelData = buffer.getWritePointer (channel);
+    
+        auto* channelLeft = buffer.getWritePointer (0);
+        auto* channelRight = buffer.getWritePointer (1);
 
         // ..do something to the data...
         
          for (int sample = 0; sample < buffer.getNumSamples(); sample++ )
     {
-            channelData[sample] *= mGainParameter->get();
+        
+        mGainSmoothed = mGainSmoothed - 0.004 * (mGainSmoothed - mGainParameter->get());
+        
+        channelLeft[sample] *= mGainSmoothed;
+        channelRight[sample] *= mGainSmoothed;
+
 
     }
             
         
-    }
+    
 }
 
 //==============================================================================
