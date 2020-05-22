@@ -21,9 +21,16 @@ KadenzePlugin1AudioProcessorEditor::KadenzePlugin1AudioProcessorEditor (KadenzeP
     
     //Here's the slider being drawn
     
+    auto& params = processor.getParameters();
+    AudioParameterFloat* gainParameter = (AudioParameterFloat*)params.getUnchecked(0);
+
+
+    
     mGainControlSlider.setBounds(0, 0, 100, 100);
     mGainControlSlider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
     mGainControlSlider.setTextBoxStyle(Slider::NoTextBox, true, 0, 0);
+    mGainControlSlider.setRange(gainParameter->range.start, gainParameter->range.end); //set slider range
+    mGainControlSlider.setValue(*gainParameter); //set the initial value of the slider to be the same as the default value of the gain parameter
     mGainControlSlider.addListener(this);
     addAndMakeVisible(mGainControlSlider);
     
@@ -52,6 +59,17 @@ void KadenzePlugin1AudioProcessorEditor::resized()
 
 void KadenzePlugin1AudioProcessorEditor::sliderValueChanged (Slider* slider)
 {
+    
+    auto& params = processor.getParameters();
+    
+    if (slider == &mGainControlSlider) {
+        
+        AudioParameterFloat* gainParameter = (AudioParameterFloat*)params.getUnchecked(0);
+        *gainParameter = mGainControlSlider.getValue();
+        
+        DBG("GAIN SLIDER HAS CHANGED");
+        
+    }
     
     DBG("SLIDER VALUE CHANGED");
     
