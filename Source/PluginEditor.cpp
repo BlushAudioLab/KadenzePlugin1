@@ -18,6 +18,14 @@ KadenzePlugin1AudioProcessorEditor::KadenzePlugin1AudioProcessorEditor (KadenzeP
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize (400, 300);
+    
+    //Here's the slider being drawn
+    
+    mGainControlSlider.setBounds(0, 0, 100, 100);
+    mGainControlSlider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
+    mGainControlSlider.setTextBoxStyle(Slider::NoTextBox, true, 0, 0);
+    addAndMakeVisible(mGainControlSlider);
+    
 }
 
 KadenzePlugin1AudioProcessorEditor::~KadenzePlugin1AudioProcessorEditor()

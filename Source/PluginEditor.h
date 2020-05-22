@@ -27,6 +27,9 @@ public:
     void resized() override;
 
 private:
+    
+    Slider mGainControlSlider;
+    
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     KadenzePlugin1AudioProcessor& processor;
