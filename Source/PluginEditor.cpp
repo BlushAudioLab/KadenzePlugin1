@@ -31,8 +31,23 @@ KadenzePlugin1AudioProcessorEditor::KadenzePlugin1AudioProcessorEditor (KadenzeP
     mGainControlSlider.setTextBoxStyle(Slider::NoTextBox, true, 0, 0);
     mGainControlSlider.setRange(gainParameter->range.start, gainParameter->range.end); //set slider range
     mGainControlSlider.setValue(*gainParameter); //set the initial value of the slider to be the same as the default value of the gain parameter
-    mGainControlSlider.addListener(this);
-    addAndMakeVisible(mGainControlSlider);
+    
+    
+    mGainControlSlider.onDragStart = [gainParameter] {
+          gainParameter->beginChangeGesture(); //begin change gesture on gain parameter
+      };
+       
+    
+    mGainControlSlider.onValueChange = [this, gainParameter] {
+        *gainParameter = mGainControlSlider.getValue(); //while slider is changing set gain to slider's current value
+    };
+    
+    
+    mGainControlSlider.onDragEnd = [gainParameter] {
+        gainParameter->endChangeGesture(); //when the slider finishes changing, end change gesture on gain parameter
+    };
+    
+    addAndMakeVisible(mGainControlSlider); //actually draw the slider
     
 }
 
@@ -57,20 +72,3 @@ void KadenzePlugin1AudioProcessorEditor::resized()
     // subcomponents in your editor..
 }
 
-void KadenzePlugin1AudioProcessorEditor::sliderValueChanged (Slider* slider)
-{
-    
-    auto& params = processor.getParameters();
-    
-    if (slider == &mGainControlSlider) {
-        
-        AudioParameterFloat* gainParameter = (AudioParameterFloat*)params.getUnchecked(0);
-        *gainParameter = mGainControlSlider.getValue();
-        
-        DBG("GAIN SLIDER HAS CHANGED");
-        
-    }
-    
-    DBG("SLIDER VALUE CHANGED");
-    
-}
