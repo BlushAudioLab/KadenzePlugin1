@@ -25,6 +25,11 @@ KadenzePlugin1AudioProcessor::KadenzePlugin1AudioProcessor()
     addParameter(mGainParameter = new AudioParameterFloat("gain", "Gain", 0.0f, 1.0f, 0.5f));
     
     mGainSmoothed = mGainParameter->get( );
+    
+    addParameter(mPhaseInvertLeftParameter = new AudioParameterBool("phase invert left", "Phase Invert Left", 0));
+    addParameter(mPhaseInvertRightParameter = new AudioParameterBool("phase invert right", "Phase Invert Right", 0));
+    
+    
 
     
 }
@@ -153,12 +158,53 @@ void KadenzePlugin1AudioProcessor::processBlock (AudioBuffer<float>& buffer, Mid
          for (int sample = 0; sample < buffer.getNumSamples(); sample++ )
     {
         
+        
+        
+        
+        
         mGainSmoothed = mGainSmoothed - 0.004 * (mGainSmoothed - mGainParameter->get());
         
-        channelLeft[sample] *= mGainSmoothed;
-        channelRight[sample] *= mGainSmoothed;
+        
 
+        /* Phase Inversion Smoothing ??? */
+        
+        //float mGainLeftInvertSmoothed = 0.f;
+        //float mGainRightInvertSmoothed = 0.f;
 
+        /* Applying Phase Left Inversion */
+        
+        
+        
+       
+        
+        
+        if (*mPhaseInvertLeftParameter == 0){
+            
+            channelLeft[sample] *= mGainSmoothed;
+            channelRight[sample] *= mGainSmoothed;
+        }
+        
+        else
+        {
+            channelLeft[sample] *= (mGainSmoothed * (-1));
+            channelRight[sample] *= (mGainSmoothed);
+        }
+
+        /* Applying Phase Right Inversion */
+        
+        if (*mPhaseInvertRightParameter == 0){
+            
+            channelLeft[sample] *= mGainSmoothed;
+            channelRight[sample] *= mGainSmoothed;
+        }
+        
+        else
+        {
+            channelLeft[sample] *= (mGainSmoothed);
+            channelRight[sample] *= (mGainSmoothed * (-1));
+        }
+        
+        
     }
             
         

@@ -59,6 +59,8 @@ private:
     
     AudioParameterFloat* mGainParameter;
     float mGainSmoothed;
+    AudioParameterBool* mPhaseInvertLeftParameter;
+    AudioParameterBool* mPhaseInvertRightParameter;
     
     
     //==============================================================================
