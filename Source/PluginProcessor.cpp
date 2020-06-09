@@ -23,6 +23,8 @@ KadenzePlugin1AudioProcessor::KadenzePlugin1AudioProcessor()
 {
     
     addParameter(mGainParameter = new AudioParameterFloat("gain", "Gain", 0.0f, 1.0f, 0.5f));
+    addParameter(mRateParameter = new AudioParameterFloat("rate", "Rate", 0.0f, 1.0f, 0.5f));
+    addParameter(mDepthParameter = new AudioParameterFloat("depth", "Depth", 0.0f, 1.0f, 0.5f));
     
     mGainSmoothed = mGainParameter->get( );
 
@@ -100,6 +102,10 @@ void KadenzePlugin1AudioProcessor::prepareToPlay (double sampleRate, int samples
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
+    
+    mLFOPhase = 0;
+    *mGainParameter = 1.0f;
+    
 }
 
 void KadenzePlugin1AudioProcessor::releaseResources()

@@ -58,7 +58,13 @@ public:
 private:
     
     AudioParameterFloat* mGainParameter;
+    AudioParameterFloat* mRateParameter;
+    AudioParameterFloat* mDepthParameter;
+    
+    
     float mGainSmoothed;
+    float mLFOPhase;
+    
     
     
     //==============================================================================
