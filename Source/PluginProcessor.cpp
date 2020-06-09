@@ -27,6 +27,9 @@ KadenzePlugin1AudioProcessor::KadenzePlugin1AudioProcessor()
     addParameter(mDepthParameter = new AudioParameterFloat("depth", "Depth", 0.0f, 1.0f, 0.5f));
     
     mGainSmoothed = mGainParameter->get( );
+    
+    
+    
 
     
 }
@@ -103,7 +106,7 @@ void KadenzePlugin1AudioProcessor::prepareToPlay (double sampleRate, int samples
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
     
-    mLFOPhase = 0;
+    mLFOPhase = 0.f;
     *mGainParameter = 1.0f;
     
 }
@@ -156,13 +159,28 @@ void KadenzePlugin1AudioProcessor::processBlock (AudioBuffer<float>& buffer, Mid
         // ..do something to the data...
     
         
-         for (int sample = 0; sample < buffer.getNumSamples(); sample++ )
+        for (int sample = 0; sample < buffer.getNumSamples(); sample++ )
     {
+        
+        float lfoOutput = sin(2*M_PI * mLFOPhase);
+        
+        lfoOutput *= *mDepthParameter;
+        
+        
+        mLFOPhase += *mRateParameter / getSampleRate(); // moves the LFO phase forwards
+            
+        if (mLFOPhase > 1) {
+                mLFOPhase -= 1;
+            } //this if statement wraps the LFO Phase between 0 and 1
+        
+        
         
         mGainSmoothed = mGainSmoothed - 0.004 * (mGainSmoothed - mGainParameter->get());
         
-        channelLeft[sample] *= mGainSmoothed;
-        channelRight[sample] *= mGainSmoothed;
+        mGainModulated = mGainSmoothed * lfoOutput;
+        
+        channelLeft[sample] *= (mGainModulated);
+        channelRight[sample] *= (mGainModulated);
 
 
     }

@@ -64,6 +64,7 @@ private:
     
     float mGainSmoothed;
     float mLFOPhase;
+    float mGainModulated;
     
     
     
