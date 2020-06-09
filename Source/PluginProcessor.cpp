@@ -162,7 +162,7 @@ void KadenzePlugin1AudioProcessor::processBlock (AudioBuffer<float>& buffer, Mid
         for (int sample = 0; sample < buffer.getNumSamples(); sample++ )
     {
         
-        float lfoOutput = sin(2*M_PI * mLFOPhase);
+        float lfoOutput = sin(2*M_PI * (4 * mLFOPhase));
         
         lfoOutput *= *mDepthParameter;
         
