@@ -61,11 +61,12 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <FILTER uid="5" x="0.2375" y="0.4519230769230769" uiLastX_Generic="471"
-          uiLastY_Generic="23" uiopen_Generic="0">
+  <FILTER uid="5" x="0.2375" y="0.4519230769230769" uiLastX_Normal="253"
+          uiLastY_Normal="28" uiopen_Normal="0" uiLastX_Generic="471" uiLastY_Generic="23"
+          uiopen_Generic="0">
     <PLUGIN name="KadenzePlugin1" format="AudioUnit" category="Effect" manufacturer="yourcompany"
             version="1.0.0" file="AudioUnit:Effects/aufx,Wngj,Manu" uid="7b7a6f67"
-            isInstrument="0" fileTime="0" infoUpdateTime="1723bbfe830" numInputs="2"
+            isInstrument="0" fileTime="0" infoUpdateTime="172c87f24d4" numInputs="2"
             numOutputs="2" isShell="0"/>
     <STATE>213.hAGaoMGcv.y0AHv.DTfAGfPBJHwDTTAWsEla0YVXiQWcxUlbTQVXzEFWkwVYsUlaz0hag0VYWMWchQWdvU1U1Ulbyk1atQEc4AWYT4VXsUlDMEla08DDT...............A..LK82O....Ru.CM.QTwDkLQ6vCQASUI4Fb0QWzNDgUOUGcvUGcRbkamoFD.HQX0YFdXUkazkFcrUFYHbAIoXiOFsDTUwVbyUGd5A3fJ9XjVB.......DP..........XA...................vm</STATE>
     <LAYOUT>
@@ -91,10 +92,10 @@
     </LAYOUT>
   </FILTER>
   <FILTER uid="7" x="0.40875" y="0.3019230769230769" uiLastX_Normal="1172"
-          uiLastY_Normal="295" uiopen_Normal="0">
+          uiLastY_Normal="295" uiopen_Normal="1">
     <PLUGIN name="AUAudioFilePlayer" format="AudioUnit" category="Generator"
             manufacturer="Apple" version="1.6.0" file="AudioUnit:Generators/augn,afpl,appl"
-            uid="6163676e" isInstrument="0" fileTime="0" infoUpdateTime="1723bbfe830"
+            uid="6163676e" isInstrument="0" fileTime="0" infoUpdateTime="172c87f24d4"
             numInputs="0" numOutputs="2" isShell="0"/>
     <STATE>580.hAGaoMGcv.C1AHv.DTfAGfPBJr.Gc3wGgvUag4VclE1XzUmbkIGUjEFcg8EDarVPUAkbkMWYzAUYxMWZyQWYtQ2TzEFcksTY4c0b0IFc4AWYWYWYxMWZu4FUzkGbk8EDOXVZrUVKxUlYkIWYtMVYyQkag0VYRDFbvwFPgxvzM3vCPDQFXYTZrUlSg0VYWIUYmk1atMmWIM2TkwVYiQWYjYTZrU1WPX0KV8Fa00VYy8RSgMVZtQ2aygFHHQzKUMWYxM2KhwVcygVX0QVZu8BQkM2Zz8FbubjTA0DHSkDSO8BRuwVZjEVdfLUaowVYfPUYyQGHME1bzUlbtbWX1EpDTOAEUXwEXjgFdIUYmk1atQzakMGSu8FbZIUYmk1atQTXzE1WP.QRyMUYrU1XzUFYRU1Yo8laZIUYmk1at4TXsUFBOAAb...........vLUbvh9G...025E..fA..fhIhA..X...vLUbvh9G...025E..fA..A72e+A....P................................................................ItND......jfVNU1cfHUYmk1atkfDgYFbrAA.RDVcm4Vzf.gUFkFakARLXUkazkFcrUFY.f..Y.fI.rB.IAPT.jE.dA.b.TG.5Avd.zG.DBPi.TI.jBP+.7e.HDvEAHR.0D.PADT.zFPsA.b.AGfwAfb.MG.zAbM.......f.A.........fH..................P.fC</STATE>
     <LAYOUT>
