@@ -10,6 +10,16 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+//==============================================================================
+
+AudioProcessorValueTreeState::ParameterLayout createParameterLayout()
+{
+    AudioProcessorValueTreeState::ParameterLayout layout;
+    //FoleysSynth::addADSRParameters (layout);
+    //FoleysSynth::addOvertoneParameters (layout);
+    //FoleysSynth::addGainParameters (layout);
+    return layout;
+}
 
 //==============================================================================
 KadenzePlugin1AudioProcessor::KadenzePlugin1AudioProcessor()
@@ -18,16 +28,18 @@ KadenzePlugin1AudioProcessor::KadenzePlugin1AudioProcessor()
                      
                        .withInput  ("Input",  AudioChannelSet::stereo(), true)
                      
-                       .withOutput ("Output", AudioChannelSet::stereo(), true))
+                       .withOutput ("Output", AudioChannelSet::stereo(), true)), //this comma is important too!
+
+treeState (*this, nullptr, ProjectInfo::projectName, createParameterLayout())
 
 {
-    
     addParameter(mGainParameter = new AudioParameterFloat("gain", "Gain", 0.0f, 1.0f, 0.5f));
     
     mGainSmoothed = mGainParameter->get( );
-
-    
 }
+
+//==============================================================================
+
 
 KadenzePlugin1AudioProcessor::~KadenzePlugin1AudioProcessor()
 {

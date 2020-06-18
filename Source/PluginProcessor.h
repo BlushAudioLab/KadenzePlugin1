@@ -57,10 +57,12 @@ public:
 
 private:
     
+    AudioProcessorValueTreeState treeState;
+    
     AudioParameterFloat* mGainParameter;
     float mGainSmoothed;
     
-    
+    foleys::MagicProcessorState magicState { *this, treeState };
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (KadenzePlugin1AudioProcessor)
 };
