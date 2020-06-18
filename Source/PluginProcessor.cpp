@@ -174,7 +174,9 @@ bool KadenzePlugin1AudioProcessor::hasEditor() const
 AudioProcessorEditor* KadenzePlugin1AudioProcessor::createEditor()
 {
     
-    return new KadenzePlugin1AudioProcessorEditor (*this);
+  //  return new KadenzePlugin1AudioProcessorEditor (*this);
+    
+    return new GenericAudioProcessorEditor (this);
     
     
 }

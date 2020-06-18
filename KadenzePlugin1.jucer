@@ -7,9 +7,6 @@
             file="Source/PluginProcessor.cpp"/>
       <FILE id="gvJRUP" name="PluginProcessor.h" compile="0" resource="0"
             file="Source/PluginProcessor.h"/>
-      <FILE id="jJTvIE" name="PluginEditor.cpp" compile="1" resource="0"
-            file="Source/PluginEditor.cpp"/>
-      <FILE id="fxeW9z" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
